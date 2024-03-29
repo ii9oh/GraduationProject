@@ -24,7 +24,7 @@ class TaskApp extends StatelessWidget {
       theme: ThemeData(
           primaryColor: kBackgroundColor, brightness: Brightness.light),
       darkTheme: ThemeData(),
-      home: AddTask(),
+      home: AddProjects(),
     );
   }
 }

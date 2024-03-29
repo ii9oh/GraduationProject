@@ -15,7 +15,7 @@ class AddTask extends StatefulWidget {
 }
 
 class _AddTaskState extends State<AddTask> {
-  final TextEditingController _titleContrller = TextEditingController();
+  final TextEditingController _titleController = TextEditingController();
   final TextEditingController _noteController = TextEditingController();
   DateTime _selectedDate = DateTime.now();
   String _endTime = "9:30 PM";
@@ -60,13 +60,13 @@ class _AddTaskState extends State<AddTask> {
               MyInputField(
                 title: "title",
                 hint: "Enter your Title",
-                controller: null,
+                controller: _titleController,
                 widget: null,
               ),
               MyInputField(
                 title: "note",
                 hint: "Enter your note",
-                controller: null,
+                controller: _noteController,
                 widget: null,
               ),
               MyInputField(
@@ -83,7 +83,7 @@ class _AddTaskState extends State<AddTask> {
                   },
                 ),
               ),
-              SizedBox(height: 20), // Added SizedBox
+              SizedBox(height: 7), // Added SizedBox
               Row(
                 children: [
                   Expanded(
@@ -145,9 +145,14 @@ class _AddTaskState extends State<AddTask> {
                   },
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(40.0),
-                child: CreateButton(lebel: "Create  ", onTap: () => null),
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(40.0),
+                    child: CreateButton(
+                        lebel: "Create  ", onTap: () => _validateDate()),
+                  ),
+                ],
               )
             ],
           ),
@@ -157,8 +162,17 @@ class _AddTaskState extends State<AddTask> {
   }
 
   _validateDate() {
-    if (_titleContrller.text.isNotEmpty && _noteController.text.isNotEmpty)
+    if (_titleController.text.isNotEmpty && _noteController.text.isNotEmpty) {
       Get.back();
+    } else if (_titleController.text.isEmpty || _noteController.text.isEmpty) {
+      Get.snackbar("Required", "All fields are required!",
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.white,
+          icon: Icon(
+            Icons.warning_amber_rounded,
+            color: Colors.red,
+          ));
+    }
   }
 
   _getDateFormUser() async {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:taskfull/config/config.dart';
 import 'package:intl/intl.dart';
 import 'package:taskfull/config/theme.dart';
+import 'package:taskfull/widgets/Home/botton_Add_Task_project.dart';
 import 'package:taskfull/widgets/button.dart';
 import 'package:get/get.dart';
 import 'package:taskfull/widgets/input_field.dart';
@@ -14,6 +15,18 @@ class AddProjects extends StatefulWidget {
 }
 
 class _AddProjectState extends State<AddProjects> {
+  final TextEditingController _titleController = TextEditingController();
+  final TextEditingController _noteController = TextEditingController();
+
+  String _endTime = "9:30 PM";
+  String _startTime = DateFormat("hh:mm a").format(DateTime.now()).toString();
+  int _selectedRemind = 5;
+  List<int> remindList = [
+    5,
+    10,
+    15,
+    20,
+  ];
   DateTime _selectedDate = DateTime.now();
   @override
   Widget build(BuildContext context) {
@@ -59,12 +72,161 @@ class _AddProjectState extends State<AddProjects> {
                 title: "Date",
                 hint: DateFormat.yMd().format(_selectedDate),
                 controller: null,
-                widget: null,
+                widget: IconButton(
+                  icon: Icon(
+                    Icons.calendar_today_outlined,
+                    color: kgreen,
+                  ),
+                  onPressed: () {
+                    _getDateFormUser();
+                  },
+                ),
+              ),
+              SizedBox(height: 7), // Added SizedBox
+              Row(
+                children: [
+                  Expanded(
+                    child: MyInputField(
+                      title: "start Date",
+                      hint: _startTime,
+                      widget: IconButton(
+                        onPressed: () {
+                          _selectStartTime();
+                        },
+                        icon: Icon(Icons.access_time_filled_rounded,
+                            color: kgreen),
+                      ),
+                      controller: null,
+                    ),
+                  ),
+                  SizedBox(width: 20), // Added SizedBox
+                  Expanded(
+                    child: MyInputField(
+                      title: "end Date",
+                      hint: _endTime,
+                      widget: IconButton(
+                        onPressed: () {
+                          _selectEndTime();
+                        },
+                        icon: Icon(Icons.access_time_filled_rounded,
+                            color: kgreen),
+                      ),
+                      controller: null,
+                    ),
+                  ),
+                ],
+              ),
+
+              MyInputField(
+                title: "Remind",
+                hint: "$_selectedRemind minutes early",
+                controller: null,
+                widget: DropdownButton<String>(
+                  icon: Icon(
+                    Icons.keyboard_arrow_down,
+                    color: kgreen,
+                  ),
+                  iconSize: 32,
+                  elevation: 4,
+                  underline: Container(
+                    height: 0,
+                  ),
+                  items: remindList.map<DropdownMenuItem<String>>((int value) {
+                    return DropdownMenuItem<String>(
+                      value: value.toString(),
+                      child: Text(value.toString()),
+                    );
+                  }).toList(),
+                  onChanged: (String? value) {
+                    setState(() {
+                      _selectedRemind = int.parse(value!);
+                    });
+                  },
+                ),
+              ),
+              MyInputField(
+                  title: "Tasks",
+                  hint: "Add your tasks",
+                  controller: null,
+                  widget: null),
+
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(40.0),
+                    child: CreateButton(
+                        lebel: "Create  ", onTap: () => _validateDate()),
+                  ),
+                ],
               )
             ],
           ),
         ),
       ),
     );
+  }
+
+  _validateDate() {
+    if (_titleController.text.isNotEmpty && _noteController.text.isNotEmpty) {
+      Get.back();
+    } else if (_titleController.text.isEmpty || _noteController.text.isEmpty) {
+      Get.snackbar("Required", "All fields are required!",
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.white,
+          icon: Icon(
+            Icons.warning_amber_rounded,
+            color: Colors.red,
+          ));
+    }
+  }
+
+  _getDateFormUser() async {
+    DateTime? _pickerDate = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2015),
+      lastDate: DateTime(2121),
+    );
+
+    if (_pickerDate != null) {
+      setState(() {
+        _selectedDate = _pickerDate;
+        print(_selectedDate);
+      });
+    } else {
+      print("it's null or something wrong!");
+    }
+  }
+
+  _selectStartTime() async {
+    TimeOfDay? selectedTime = await showTimePicker(
+      context: context,
+      initialTime: TimeOfDay.now(),
+    );
+
+    if (selectedTime != null) {
+      setState(() {
+        _startTime = selectedTime.format(context);
+        print(_startTime);
+      });
+    } else {
+      print("it's null or something wrong!");
+    }
+  }
+
+  _selectEndTime() async {
+    TimeOfDay? selectedTime = await showTimePicker(
+      context: context,
+      initialTime: TimeOfDay.now(),
+    );
+
+    if (selectedTime != null) {
+      setState(() {
+        _endTime = selectedTime.format(context);
+        print(_endTime);
+      });
+    } else {
+      print("it's null or something wrong!");
+    }
   }
 }

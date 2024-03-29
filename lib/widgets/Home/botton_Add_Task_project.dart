@@ -5,10 +5,13 @@ import 'package:taskfull/config/theme.dart';
 
 class CreateButton extends StatelessWidget {
   final String lebel;
-  final Function()? onTap;
+  final Function() onTap;
 
-  const CreateButton({Key? key, required this.lebel, required this.onTap})
-      : super(key: key);
+  const CreateButton({
+    Key? key,
+    required this.lebel,
+    required this.onTap,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +20,7 @@ class CreateButton extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.only(left: 20),
         child: Container(
-          width: 600,
+          width: 250,
           height: 52,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
