@@ -25,7 +25,7 @@ class MyInputField extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            Title as String,
+            title,
             style: CustomFontStyle().normal(16, Colors.black),
           ),
           Container(
@@ -42,6 +42,7 @@ class MyInputField extends StatelessWidget {
               children: [
                 Expanded(
                   child: TextFormField(
+                    readOnly: widget == null ? false : true,
                     autofocus: false,
                     controller: controller,
                     style: customText().normal(14, Colors.black),
@@ -55,7 +56,12 @@ class MyInputField extends StatelessWidget {
 
                         ),
                   ),
-                )
+                ),
+                widget == null
+                    ? Container()
+                    : Container(
+                        child: widget,
+                      )
               ],
             ),
           ),

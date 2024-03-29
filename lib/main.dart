@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:taskfull/app/task_app.dart';
 import 'package:taskfull/config/config.dart';
 import 'package:taskfull/config/theme.dart';
+import 'package:taskfull/screens/add_project.dart';
 import 'package:taskfull/screens/add_task.dart';
 import 'package:taskfull/screens/home_screen.dart';
 import 'package:taskfull/screens/personal_page.dart';

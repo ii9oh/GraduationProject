@@ -3,11 +3,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:taskfull/config/config.dart';
 import 'package:taskfull/config/theme.dart';
 
-class MyButton extends StatelessWidget {
+class CreateButton extends StatelessWidget {
   final String lebel;
   final Function()? onTap;
 
-  const MyButton({Key? key, required this.lebel, required this.onTap})
+  const CreateButton({Key? key, required this.lebel, required this.onTap})
       : super(key: key);
 
   @override
@@ -17,16 +17,19 @@ class MyButton extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.only(left: 20),
         child: Container(
-          width: 40,
-          height: 35,
+          width: 600,
+          height: 52,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
-            color: const Color.fromARGB(82, 255, 255, 255),
+            color: bwhite,
           ),
-          child: Text(
-            lebel,
-            style: CustomFontStyle().bold(28, kblue),
-            textAlign: TextAlign.center,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              lebel,
+              style: CustomFontStyle().bold(20, kblue),
+              textAlign: TextAlign.center,
+            ),
           ),
         ),
       ),

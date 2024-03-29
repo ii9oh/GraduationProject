@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:taskfull/config/config.dart';
 import 'package:taskfull/config/theme.dart';
+import 'package:taskfull/screens/add_project.dart';
 import 'package:taskfull/screens/add_task.dart';
 import 'package:taskfull/widgets/button.dart';
 
@@ -174,13 +175,33 @@ class HomeScreen extends StatelessWidget {
             ),
 
             //my projact
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              alignment: Alignment.centerLeft,
-              child: Text(
-                "My Project",
-                style: CustomFontStyle().bold(24, Colors.black),
-              ),
+            Row(
+              children: [
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "My Project",
+                    style: CustomFontStyle().bold(24, Colors.black),
+                  ),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 55),
+                    child: Column(children: [
+                      MyButton(
+                        lebel: "+",
+                        onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => AddProjects())),
+                      ),
+                    ]),
+                  ),
+                )
+              ],
             ),
             //project contaier
             Expanded(
@@ -210,7 +231,7 @@ class HomeScreen extends StatelessWidget {
                               ),
                               Text(
                                 "start",
-                                style: CustomFontStyle().normal(13, kblue),
+                                style: CustomFontStyle().bold(13, kblue),
                               )
                             ],
                           ),
