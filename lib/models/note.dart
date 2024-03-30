@@ -12,6 +12,10 @@ class Note {
 }
 
 List<Note> sampleNote = [
-  Note(id: 0, title: "", content: "content", modifiefTime: DateTime.now()),
+  Note(
+      id: 0,
+      title: "My Sweet diray",
+      content: "content",
+      modifiefTime: DateTime.now()),
   Note(id: 1, title: 'try', content: "content", modifiefTime: DateTime.now()),
 ];

@@ -1,7 +1,9 @@
-/*import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:taskfull/config/config.dart';
-import 'package:percent_indicator/percent_indicator.dart';
-
+import 'package:taskfull/config/theme.dart';
+import 'package:taskfull/widgets/daily_steps_container.dart';
+import 'package:taskfull/widgets/progress_bar_widget.dart';
 
 class PersonalPage extends StatelessWidget {
   const PersonalPage({super.key});
@@ -9,20 +11,99 @@ class PersonalPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: kBackgroundColor,
-      body: Center(
-        child: Column(
-          children: [
-            CircularPercentIndicator(
-              radius: 60.0,
-              lineWidth: 5.0,
-              percent: 1.0,
-              center: new Text("90%"),
-              progressColor: Colors.green,
-            )
-          ],
+      appBar: AppBar(
+        backgroundColor: const Color.fromRGBO(35, 53, 49, 100),
+        leading: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                Icons.menu,
+                color: Colors.white,
+                size: 30,
+              )),
+        ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: IconButton(
+                onPressed: () {},
+                icon: const Icon(
+                  Icons.search,
+                  color: Color.fromRGBO(203, 208, 95, 1),
+                  size: 30,
+                )),
+          ),
+        ],
+      ),
+      backgroundColor: const Color.fromRGBO(35, 53, 49, 100),
+      body: SafeArea(
+        child: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Color.fromRGBO(35, 53, 49, 0),
+                Color.fromRGBO(35, 53, 49, 100),
+              ],
+              begin: Alignment.bottomCenter,
+              end: Alignment.topCenter,
+            ),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Center(
+              child: Column(
+                children: [
+                  // Header Section
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        height: 100,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 16),
+                        child: CircleAvatar(
+                          radius: 30,
+                        ),
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Hello!",
+                            style: CustomFontStyle().normal(23, Colors.white),
+                          ),
+                          Text(
+                            "Ruqaia Alghuwaizi",
+                            style: CustomFontStyle().bold(24, Colors.white),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 100,
+                  ),
+                  // Body Section
+                  ProgressBarWidget(
+                    totalProject: "00",
+                    doneProject: "00",
+                    inProgressProject: "00",
+                    pendingProject: "00",
+                  ),
+
+                  SizedBox(
+                    height: 100,
+                  ),
+                  // Footer Section
+                  DailyStepsWidget(steps: "3000"),
+                ],
+              ),
+            ),
+          ),
         ),
       ),
     );
   }
-}*/
+}

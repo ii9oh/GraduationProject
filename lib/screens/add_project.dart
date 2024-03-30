@@ -82,6 +82,7 @@ class _AddProjectState extends State<AddProjects> {
                   },
                 ),
               ),
+              /*
               SizedBox(height: 7), // Added SizedBox
               Row(
                 children: [
@@ -143,19 +144,35 @@ class _AddProjectState extends State<AddProjects> {
                     });
                   },
                 ),
-              ),
-              MyInputField(
-                  title: "Tasks",
-                  hint: "Add your tasks",
-                  controller: null,
-                  widget: null),
+              ),*/
 
+              MyInputField(
+                  title: "Project Tasks",
+                  hint: "Add The Task you want to Project",
+                  controller: null,
+                  widget: IconButton(
+                    icon: Icon(
+                      Icons.delete_outline_outlined,
+                      color: kgreen,
+                    ),
+                    onPressed: () {},
+                  )),
+              TextField(
+                  decoration: InputDecoration(
+                hintText: "Add Tasks",
+                hintStyle: TextStyle(color: bwhite),
+                prefixIcon: Icon(Icons.add),
+              )),
               Row(
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(40.0),
                     child: CreateButton(
-                        lebel: "Create  ", onTap: () => _validateDate()),
+                      lebel: "Create  ",
+                      onTap: () {
+                        print("object");
+                      },
+                    ),
                   ),
                 ],
               )
